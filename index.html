@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+
+<head>
+    <meta charset="UTF-8">
+    <title>網頁過載</title>
+    <meta http-equiv="refresh" content="5;url=index.html">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <style>
+        body {
+            text-align: center;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background: url('wait.jpg') no-repeat center center, #f0f0f0; /* 背景圖片 + 備用背景色 */
+            background-size: cover;
+            animation: fadeIn 1s ease-in; /* 頁面淡入效果 */
+        }
+
+        .loading-image {
+            width: 50vh;
+            height: 50vh;
+            background: url('loadinground.png') no-repeat center center;
+            background-size: contain;
+            animation: rotate 2s ease-in-out infinite; /* 旋轉動畫 */
+        }
+
+        h1, p {
+            font-size: 2em;
+            color: #333;
+            background-color: rgba(255, 255, 255, 0.9); /* 更不透明的背景 */
+            border: 2px solid #ccc;
+            padding: 10px;
+            border-radius: 10px;
+            margin: 10px;
+        }
+
+        p {
+            font-size: 1.2em;
+            color: #666;
+        }
+
+        a {
+            color: #06f;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        button {
+            margin-top: 10px;
+            padding: 10px 20px;
+            font-size: 1em;
+            color: #fff;
+            background-color: #06f;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #05c;
+        }
+
+        @keyframes rotate {
+            from {
+                transform: rotate(0deg);
+            }
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 1.5em;
+            }
+            p {
+                font-size: 1em;
+            }
+            .loading-image {
+                width: 30vh;
+                height: 30vh;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="loading-image" aria-label="加載中"></div>
+    <h1>網頁過載</h1>
+    <p>網頁過載，請稍後再試。</p>
+    <p>本頁面將在 <span id="countdown">5</span> 秒後重新整理</p>
+    <button onclick="window.location.href='index.html'">立即重新整理</button>
+    <p>如果問題持續，請聯繫我們：<a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">D1285428@o365.fcu.edu.tw</a></p>
+    <script>
+        var timeleft = 5;
+        var downloadTimer = setInterval(function () {
+            timeleft--;
+            document.getElementById("countdown").textContent = timeleft;
+            if (timeleft <= 0) {
+                clearInterval(downloadTimer);
+                window.location.href = "index.html"; // 倒數結束後自動重新導向
+            }
+        }, 1000);
+    </script>
+</body>
+
+</html>
