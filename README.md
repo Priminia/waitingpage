@@ -80,6 +80,7 @@ P.S.但是我沒正確導向，因為我沒有社群
 
 ---
 
-# c. 需要包含 commit 次數的截圖
-![螢幕擷取畫面 2025-03-04 191923](https://github.com/user-attachments/assets/5debdfff-730b-4f28-9374-efb5eb378d16)
+# c. 需要包含 commit 次數的截圖 8 + 1
+![image](https://github.com/user-attachments/assets/5048d84c-9b9e-410b-aa99-eb2c467e47c0)
+
 
