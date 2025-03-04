@@ -1,127 +1,164 @@
 <!DOCTYPE html>
 <html lang="zh-Hant">
-
 <head>
     <meta charset="UTF-8">
-    <title>網頁過載</title>
-    <meta http-equiv="refresh" content="10;url=index.html">
-    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
-    <meta http-equiv="Pragma" content="no-cache">
-    <meta http-equiv="Expires" content="0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>伺服器維修中</title>
     <style>
+        html, body {
+            height: 100%; /* 確保 html 和 body 高度為 100% */
+            margin: 0; /* 移除默認 margin */
+            overflow: hidden; /* 禁止滾動 */
+        }
         body {
+            font-family: 'Courier New', Courier, monospace;
+            background: url('background.png') no-repeat center center fixed;
+            background-size: cover;
+            color: #fff;
             text-align: center;
-            font-family: Arial, sans-serif;
-            margin: 0;
-            height: 100vh;
+            padding: 20px; /* 減少 padding，避免內容超出視窗 */
+            position: relative;
+            height: 100vh; /* 確保 body 高度剛好是視窗高度 */
             display: flex;
             flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            background: url('wait.jpg') no-repeat center center, #f0f0f0; /* 背景圖片 + 備用背景色 */
-            background-size: cover;
-            animation: fadeIn 1s ease-in; /* 頁面淡入效果 */
+            justify-content: center; /* 內容垂直居中 */
+            align-items: center; /* 內容水平居中 */
         }
-
-        .loading-image {
-            width: 50vh;
-            height: 50vh;
-            background: url('loadinground.png') no-repeat center center;
-            background-size: contain;
-            animation: rotate 2s ease-in-out infinite; /* 旋轉動畫 */
-        }
-
-        h1, p {
-            font-size: 2em;
-            color: #333;
-            background-color: rgba(255, 255, 255, 0.9); /* 更不透明的背景 */
-            border: 2px solid #ccc;
-            padding: 10px;
+        .retro-theme {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: rgba(34, 34, 34, 0.8);
+            padding: 20px;
             border-radius: 10px;
-            margin: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
         }
-
-        p {
-            font-size: 1.2em;
-            color: #666;
+        .pixel-art-progress-bar {
+            width: 100%;
+            height: 20px;
+            background: linear-gradient(to right, #4caf50 75%, #555 75%);
+            margin: 20px 0;
         }
-
-        a {
-            color: #06f;
+        .mini-game-container {
+            margin: 20px 0;
+        }
+        #click-to-attack {
+            padding: 15px 30px; /* 增加按鈕的內邊距 */
+            font-size: 16px;
+            cursor: pointer; /* 確保滑鼠懸停時顯示為手指 */
+            background-color: #4caf50; /* 按鈕背景色 */
+            color: #fff; /* 按鈕文字顏色 */
+            border: none; /* 移除默認邊框 */
+            border-radius: 5px; /* 圓角 */
+            transition: background-color 0.3s ease; /* 添加過渡效果 */
+            z-index: 10; /* 確保按鈕在最上層 */
+            position: relative; /* 確保 z-index 生效 */
+        }
+        #click-to-attack:hover {
+            background-color: #45a049; /* 滑鼠懸停時的背景色 */
+        }
+        #boss-health-bar {
+            width: 100%;
+            height: 20px;
+            background: linear-gradient(to right, #f44336 100%, #555 0%);
+            margin-top: 10px;
+        }
+        .status-update {
+            margin: 20px 0;
+        }
+        .status-update a {
+            color: #4caf50;
             text-decoration: none;
         }
-
-        a:hover {
+        .status-update a:hover {
             text-decoration: underline;
         }
-
-        button {
-            margin-top: 10px;
-            padding: 10px 20px;
-            font-size: 1em;
-            color: #fff;
-            background-color: #06f;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
+        .character {
+            position: absolute;
+            bottom: 70px; /* 角色固定在底部 */
+            left: 45%; /* 稍微偏左 */
+            transform: translateX(-50%) scale(2); /* 放大角色 */
+            width: 56px;
+            height: 56px; 
+            background: url('char_blue_1.png') no-repeat;
+            animation: animateCharacter 1s steps(8) infinite;
         }
-
-        button:hover {
-            background-color: #05c;
+        .boss {
+            position: absolute;
+            bottom: 20px; /* BOSS 固定在底部 */
+            left: 55%; /* 稍微偏右 */
+            transform: translateX(-50%) scale(1/6); /* 放大 BOSS */
+            width: 300px;
+            height: 300px;
+            background: url('boss_1.png') no-repeat;
+            animation: animateBoss 1s steps(5) infinite;
         }
-
-        @keyframes rotate {
-            from {
-                transform: rotate(0deg);
-            }
-            to {
-                transform: rotate(360deg);
-            }
+        /* 角色跑步動畫 */
+        @keyframes animateCharacter {
+            0% { background-position: 0 -112px; }
+            100% { background-position: -448px -112px; } 
         }
-
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-            }
-            to {
-                opacity: 1;
-            }
+        /* 角色攻擊動畫 */
+        @keyframes attackCharacter {
+            0% { background-position: 0 -56px; }
+            100% { background-position: -448px -56px; } 
         }
-
-        @media (max-width: 768px) {
-            h1 {
-                font-size: 1.5em;
-            }
-            p {
-                font-size: 1em;
-            }
-            .loading-image {
-                width: 30vh;
-                height: 30vh;
-            }
+        /* BOSS站立動畫 */
+        @keyframes animateBoss {
+            0% { background-position: 0 0; }
+            100% { background-position: -1500px 0; } 
         }
     </style>
 </head>
-
 <body>
-    <div class="loading-image" aria-label="加載中"></div>
-    <h1>網頁過載</h1>
-    <p>網頁過載，請稍後再試。</p>
-    <p>本頁面將在 <span id="countdown">10</span> 秒後重新整理</p>
-    <!-- 立即重整 -->
-    <button onclick="window.location.reload()">立即重新整理</button>
-    <p>如果問題持續，請聯繫我們：<a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">D1285428@o365.fcu.edu.tw</a></p>
+    <div class="retro-theme">
+        <h1>🛠️ 伺服器維修中！</h1>
+        <p>我們的工程師正在討罰導致當機的 BOSS！</p>
+        
+        <!-- 動態元素 -->
+        <div class="pixel-art-progress-bar"></div>
+        <div class="mini-game-container">
+            <button id="click-to-attack">點擊攻擊 BOSS ！</button>
+            <div id="boss-health-bar"></div>
+        </div>
+      
+        <!-- 實用資訊 -->
+        <div class="status-update">
+            <p>當前進度：75%</p>
+            <a href="/discord">加入 Discord 臨時基地</a>
+        </div>
+    </div>
+
+    <div class="character"></div>
+    <div class="boss"></div>
+
     <script>
-        var timeleft = 10;
-        var downloadTimer = setInterval(function () {
-            timeleft--;
-            document.getElementById("countdown").textContent = timeleft;
-            if (timeleft <= 0) {
-                clearInterval(downloadTimer);
-                window.location.href = "index.html"; // 倒數結束後自動重新導向
+        let bossHealth = 100;
+        const bossHealthBar = document.getElementById('boss-health-bar');
+        const attackButton = document.getElementById('click-to-attack');
+
+        attackButton.addEventListener('click', () => {
+            // 角色移動left到55%，不是瞬間移動，而是有動畫
+            document.querySelector('.character').style.transition = 'left 0.5s ease';
+            document.querySelector('.character').style.left = '55%';
+            
+            // 角色攻擊動畫
+            document.querySelector('.character').style.animation = 'attackCharacter 0.5s steps(8) 1';
+            setTimeout(() => {
+                document.querySelector('.character').style.animation = 'animateCharacter 1s steps(8) infinite';
+            }, 500);
+            // 攻擊動畫完後角色left到45%
+            setTimeout(() => {
+                document.querySelector('.character').style.left = '45%';
+            }, 500);
+            if (bossHealth > 0) {
+                bossHealth -= 10;
+                updateBossHealthBar();
             }
-        }, 1000);
+        });
+
+        function updateBossHealthBar() {
+            bossHealthBar.style.background = `linear-gradient(to right, #f44336 ${bossHealth}%, #555 ${100 - bossHealth}%)`;
+        }
     </script>
 </body>
-
 </html>
