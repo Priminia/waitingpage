@@ -8,9 +8,7 @@
 
 # **社群連結**
 
-提供 **替代入口**（如 Discord 連結）或 **即時熱門話題預覽**，讓用戶在等待時仍能參與社群活動。
-
-P.S.但是我沒正確導向，因為我沒有社群
+提供 **替代入口**（如 Facebook 連結）或 **即時熱門話題預覽**，讓用戶在等待時仍能參與社群活動。
 
 # b.介紹該網頁使用到那些 HTML , CSS, ~~JavaScript~~，請用圖文並茂的方式分享。
 
@@ -80,5 +78,6 @@ P.S.但是我沒正確導向，因為我沒有社群
 
 ---
 
-# c. 需要包含 commit 次數的截圖 15
-![image](https://github.com/user-attachments/assets/1c2ab565-5e29-42c7-9986-b6521eb9f3b6)
+# c. 需要包含 commit 次數的截圖 16 + 1
+![image](https://github.com/user-attachments/assets/9318a07d-7d0d-4c5a-8220-9075b8789a15)
+
