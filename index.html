@@ -75,7 +75,7 @@
         .character {
             position: absolute;
             bottom: 70px; /* 角色固定在底部 */
-            left: 45%; /* 稍微偏左 */
+            left: 40%; /* 稍微偏左 */
             transform: translateX(-50%) scale(2); /* 放大角色 */
             width: 56px;
             height: 56px; 
@@ -85,7 +85,7 @@
         .boss {
             position: absolute;
             bottom: 20px; /* BOSS 固定在底部 */
-            left: 55%; /* 稍微偏右 */
+            left: 60%; /* 稍微偏右 */
             transform: translateX(-50%) scale(1/6); /* 放大 BOSS */
             width: 300px;
             height: 300px;
@@ -141,7 +141,7 @@
         attackButton.addEventListener('click', () => {
             // 角色移動left到55%，不是瞬間移動，而是有動畫
             document.querySelector('.character').style.transition = 'left 0.5s ease';
-            document.querySelector('.character').style.left = '55%';
+            document.querySelector('.character').style.left = '60%';
             
             // 角色攻擊動畫
             document.querySelector('.character').style.animation = 'attackCharacter 0.5s steps(8) 1';
