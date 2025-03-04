@@ -179,12 +179,41 @@
                     setTimeout(() => {
                         document.querySelector('.character').style.display = 'none';
                         document.querySelector('.mini-game-container').innerHTML = '<h2>🎉 已擊敗 BOSS！</h2>';
+                        
                         // 移除 BOSS 血條
                         bossHealthBar.style.display = 'none';
                         //重新挑戰按鈕，並重製角色和BOSS
                         document.querySelector('.mini-game-container').innerHTML += '<button onclick="window.location.reload();">重新挑戰</button>';
                     }, 2000); // 等待角色跑到右邊後再顯示擊敗
                 }, 500);
+                // 顯示彩帶動畫
+                const confettiContainer = document.createElement('div');
+                confettiContainer.style.position = 'fixed';
+                confettiContainer.style.top = 0;
+                confettiContainer.style.left = 0;
+                confettiContainer.style.width = '100%';
+                confettiContainer.style.height = '100%';
+                confettiContainer.style.background = 'url(confetti.gif) no-repeat center center';
+                confettiContainer.style.backgroundSize = 'cover';
+                confettiContainer.style.zIndex = 1000;
+                confettiContainer.style.opacity = 0;
+                confettiContainer.style.transition = 'opacity 1s ease-in-out';
+                document.body.appendChild(confettiContainer);
+
+                // 漸入效果
+                setTimeout(() => {
+                    confettiContainer.style.opacity = 1;
+                }, 0);
+
+                // 移除彩帶動畫
+                setTimeout(() => {
+                    // 漸出效果
+                    confettiContainer.style.opacity = 0;
+                    setTimeout(() => {
+                        confettiContainer.remove();
+                    }, 1000); // 等待漸出效果完成後移除
+                }, 3000); // 3秒後開始漸出效果
+                
             }
             
             
