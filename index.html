@@ -111,7 +111,7 @@
 </head>
 <body>
     <div class="retro-theme">
-        <!-- 添加Bahamut_Logo.svg.png 當作logo當作logo -->
+        <!-- 添加Bahamut_Logo.svg.png 當作logo-->
         <img src="Bahamut_Logo.svg.png" alt="巴哈姆特" style="width: 200px; height: auto;">
         <h1>🛠️ 伺服器維修中！</h1>
         <p>我們的工程師正在討伐導致當機的 BOSS！</p>
@@ -144,23 +144,58 @@
             document.querySelector('.character').style.left = '60%';
             
             // 角色攻擊動畫
-            document.querySelector('.character').style.animation = 'attackCharacter 0.5s steps(8) 1';
+            document.querySelector('.character').style.animation = 'attackCharacter 0.5s steps(8)';
+
+            // 扣 BOSS 血量
+            bossHealth -= 10;
+            updateBossHealthBar();
+
+            // 動畫結束後重置動畫
             setTimeout(() => {
                 document.querySelector('.character').style.animation = 'animateCharacter 1s steps(8) infinite';
             }, 500);
-            // 攻擊動畫完後角色left到45%
+
+            // 禁用按鈕，動畫結束後再啟用
+            attackButton.disabled = true;
             setTimeout(() => {
-                document.querySelector('.character').style.left = '45%';
-            }, 500);
-            if (bossHealth > 0) {
-                bossHealth -= 10;
-                updateBossHealthBar();
+                attackButton.disabled = false;
+            }, 1000);
+            //等待動畫結束
+            setTimeout(() => {
+                document.querySelector('.character').style.transition = 'left 0.5s ease';
+                document.querySelector('.character').style.left = '40%';
+            }, 500); 
+            
+            // 確認BOSS血量是否為0
+            if (bossHealth <= 0) {
+                // 等待角色跑到右邊
+                setTimeout(() => {
+                    document.querySelector('.character').style.transition = 'left 3s ease';
+                    document.querySelector('.character').style.left = '100%';
+                    // BOSS 漸隱
+                    document.querySelector('.boss').style.transition = 'opacity 1s ease';
+                    document.querySelector('.boss').style.opacity = 0;
+                    
+                    // BOSS 血量為 0，顯示已擊敗
+                    setTimeout(() => {
+                        document.querySelector('.character').style.display = 'none';
+                        document.querySelector('.mini-game-container').innerHTML = '<h2>🎉 已擊敗 BOSS！</h2>';
+                        // 移除 BOSS 血條
+                        bossHealthBar.style.display = 'none';
+                        //重新挑戰按鈕，並重製角色和BOSS
+                        document.querySelector('.mini-game-container').innerHTML += '<button onclick="window.location.reload();">重新挑戰</button>';
+                    }, 2000); // 等待角色跑到右邊後再顯示擊敗
+                }, 500);
             }
+            
+            
         });
 
+        // 更新 BOSS 血條
         function updateBossHealthBar() {
-            bossHealthBar.style.background = `linear-gradient(to right, #f44336 ${bossHealth}%, #555 ${100 - bossHealth}%)`;
+            bossHealthBar.style.background = `linear-gradient(to right, #f44336 ${bossHealth}%, #555 ${bossHealth}%)`;
         }
+
     </script>
 </body>
 </html>
