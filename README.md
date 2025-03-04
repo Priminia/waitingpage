@@ -80,8 +80,5 @@ P.S.但是我沒正確導向，因為我沒有社群
 
 ---
 
-# c. 需要包含 commit 次數的截圖 10 +１
-![image](https://github.com/user-attachments/assets/49850d3e-46d8-46a2-a00a-e3f0705f00a1)
-
-
-
+# c. 需要包含 commit 次數的截圖 15
+![image](https://github.com/user-attachments/assets/1c2ab565-5e29-42c7-9986-b6521eb9f3b6)
